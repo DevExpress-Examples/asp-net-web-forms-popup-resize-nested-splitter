@@ -3,20 +3,42 @@
 [![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/E3559)
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
-<!-- default file list -->
-*Files to look at*:
 
-* [Default.aspx](./CS/WebSite/Default.aspx) (VB: [Default.aspx](./VB/WebSite/Default.aspx))
-* [Default.aspx.cs](./CS/WebSite/Default.aspx.cs) (VB: [Default.aspx.vb](./VB/WebSite/Default.aspx.vb))
-<!-- default file list end -->
-# How to resize ASPxSplitter placed inside ASPxPopupControl when resizing ASPxPopupControl
+# Popup Control for ASP.NET Web Forms - How to resize control content (Splitter) when resizing the popup
 <!-- run online -->
 **[[Run Online]](https://codecentral.devexpress.com/e3559/)**
 <!-- run online end -->
 
+This example demonstrates how to resize the nested [ASPxSplitter](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxSplitter) control when the [ASPxPopupControl](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxPopupControl) is resized.
 
-<p>At present, ASPxPopupControl does not have the built-in capability to resize nested controls when it's resizing. This example illustrates how to automatically resize controls places inside the popup. To accomplish this task, execute the following steps:</p><p>1. Set the <a href="http://documentation.devexpress.com/#AspNet/DevExpressWebASPxPopupControlASPxPopupControlBase_ScrollBarstopic"><u>ASPxPopupControl.ScrollBars</u></a> property to "Auto". This option will allow the popup control to evaluate the content width and height.</p><p>2. Handle the <a href="http://documentation.devexpress.com/#AspNet/DevExpressWebASPxPopupControlScriptsASPxClientPopupControlBase_AfterResizingtopic"><u>ASPxClientPopupControl.AfterResizing</u></a> event. In this event handler, call the <a href="http://documentation.devexpress.com/#AspNet/DevExpressWebASPxClassesScriptsASPxClientControl_AdjustControltopic"><u>AdjustControl</u></a> method for a desired control to force it to reevaluate its size.</p><p>3. Place the control into the <strong><div style="height: 100%; width: 100%; overflow: hidden"></strong> element. This element is necessary to overcome scrollbars that can be shown when ScrollBars="Auto" is set.</p>
+![Popup resizing](popup-resizing.gif)
 
-<br/>
+The [ASPxPopupControl](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxPopupControl) does not have a built-in capability to resize nested controls when it is resized. This example illustrates how to automatically resize control places inside a popup. 
 
+To accomplish this task, execute the following steps:
 
+1. Set the [ASPxPopupControl.ScrollBars](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxPopupControlBase.ScrollBars) property to `Auto`. This option allows the popup control to evaluate content width and height.
+    ```html
+    <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" Height="500px" Width="500px" 
+                         ScrollBars="Auto" AllowResize="true" LoadContentViaCallback="OnFirstShow">
+        ...
+    </dx:ASPxPopupControl>
+    ```
+2. Handle the [ASPxClientPopupControl.AfterResizing](https://docs.devexpress.com/AspNet/js-ASPxClientPopupControlBase.AfterResizing) event. In the event handler, call the [AdjustControl](https://docs.devexpress.com/AspNet/js-ASPxClientControl.AdjustControl) method for a nested control to force the control to reevaluate its size.
+    ```js
+    function OnAfterResizing() {
+        splitter.AdjustControl();
+    }
+    ```
+3. Place the nested control into the `div` element with the following style. This element is necessary to overcome scrollbars that can be shown when `ScrollBars="Auto"` is set.
+    ```html
+    <div style="height: 100%; width: 100%; overflow: hidden">
+        <dx:ASPxSplitter ID="ASPxSplitter" runat="server" Width="100%" Height="100%" ClientInstanceName="splitter">
+            ...
+        </dx:ASPxSplitter>
+    </div>
+    ```
+
+## Files to Review
+
+* [Default.aspx](./CS/WebSite/Default.aspx) (VB: [Default.aspx](./VB/WebSite/Default.aspx))
