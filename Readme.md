@@ -13,18 +13,18 @@ This example demonstrates how to resize the nested [ASPxSplitter](https://docs.d
 
 ![Popup resizing](popup-resizing.gif)
 
-The [ASPxPopupControl](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxPopupControl) does not have the built-in capability to resize nested controls when it is resized. This example illustrates how to automatically resize controls places inside the popup. 
+The [ASPxPopupControl](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxPopupControl) does not have a built-in capability to resize nested controls when it is resized. This example illustrates how to automatically resize control places inside a popup. 
 
 To accomplish this task, execute the following steps:
 
-1. Set the [ASPxPopupControl.ScrollBars](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxPopupControlBase.ScrollBars) property to `Auto`. This option allows the popup control to evaluate the content width and height.
+1. Set the [ASPxPopupControl.ScrollBars](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxPopupControlBase.ScrollBars) property to `Auto`. This option allows the popup control to evaluate content width and height.
     ```html
     <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" Height="500px" Width="500px" 
                          ScrollBars="Auto" AllowResize="true" LoadContentViaCallback="OnFirstShow">
         ...
     </dx:ASPxPopupControl>
     ```
-2. Handle the [ASPxClientPopupControl.AfterResizing](https://docs.devexpress.com/AspNet/js-ASPxClientPopupControlBase.AfterResizing) event. In the event handler, call the [AdjustControl](https://docs.devexpress.com/AspNet/js-ASPxClientControl.AdjustControl) method for a nested control to force it to reevaluate its size.
+2. Handle the [ASPxClientPopupControl.AfterResizing](https://docs.devexpress.com/AspNet/js-ASPxClientPopupControlBase.AfterResizing) event. In the event handler, call the [AdjustControl](https://docs.devexpress.com/AspNet/js-ASPxClientControl.AdjustControl) method for a nested control to force the control to reevaluate its size.
     ```js
     function OnAfterResizing() {
         splitter.AdjustControl();
