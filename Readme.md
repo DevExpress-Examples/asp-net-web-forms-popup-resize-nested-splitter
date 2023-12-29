@@ -5,9 +5,6 @@
 <!-- default badges end -->
 
 # Popup Control for ASP.NET Web Forms - How to resize control content (Splitter) when resizing the popup
-<!-- run online -->
-**[[Run Online]](https://codecentral.devexpress.com/128565014/)**
-<!-- run online end -->
 
 This example demonstrates how to resize the nested [ASPxSplitter](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxSplitter) control when the [ASPxPopupControl](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxPopupControl) is resized.
 
